@@ -187,9 +187,27 @@ main {
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-label {
+.textCenter {
+   display: flex;
+  text-align: center;
+  justify-content: center;
+   flex-grow: 2;
+} 
+
+.verticalAlign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  label {
   font-family: var(--font-default);
   font-size: 17px;
   font-weight: normal;
@@ -365,6 +383,7 @@ input:focus:invalid {
 
 #validation-reussi {
   display: none;
+
 }
 
 
