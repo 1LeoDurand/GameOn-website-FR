@@ -27,6 +27,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  document.getElementById('formulaire').reset();
 }
 
 // close modal event
@@ -41,6 +42,8 @@ document.querySelector("span.close").addEventListener('click', closeModal);
 function closeModal() {
   modalbg.style.display = "none";
 }
+
+
 
 /*
 (1) Lier les labels aux entrées dans le HTML en utilisant les attributs "for" et "id" dans le code existant. Corriger le code HTML quand nécessaire.
@@ -80,37 +83,6 @@ Bouton radio
 Id = location1
 Condition générale d'utilisation
 For = checkbox1
-*/
-/*
-let eMail = document.getElementById("email");
-
-eMail.addEventListener("keyup", function (event) {
-  if(eMail.validity.typeMismatch||eMail.validity.valueMissing) {
-    eMail.setCustomValidity("J'attend un e-mail, cher gamer!");
-  } else {
-    eMail.setCustomValidity("");
-  }
-});
-
-let birthDate = document.getElementById("birthdate");
-
-birthDate.addEventListener("keyup", function (event) {
-  if(birthDate.validity.typeMismatch||birthDate.validity.valueMissing) {
-    birthDate.setCustomValidity("J'attend une date de naissance, cher gamer!");
-  } else {
-    birthDate.setCustomValidity("");
-  }
-});
-
-let nombreConcours = document.getElementById("quantity");
-
-nombreConcours.addEventListener("keyup", function (event) {
-  if(nombreConcours.validity.typeMismatch||nombreConcours.validity.valueMissing) {
-    nombreConcours.setCustomValidity("J'attend votre nombre de participation au concours, cher gamer!");
-  } else {
-    nombreConcours.setCustomValidity("");
-  }
-});
 */
 
 // prenom
@@ -152,6 +124,8 @@ first.addEventListener("input", function (event) {
     errorfirst.className = "error"; // On réinitialise l'état visuel du message
   }
 }, false);
+//false : ne pas capturer l'évènement
+
 
 //nom
 
@@ -225,12 +199,12 @@ form.addEventListener("submit", function (event) {
     event.preventDefault();
   }
   if (!first.validity.valid) {
-    errorfirst.innerHTML = "Tu t'appelles pas Voldemort, alors donnes ton prénom&nbsp;!";
+    errorfirst.innerHTML = "Insérer au moins deux caractère";
     errorfirst.className = "error active";
     event.preventDefault();
   }
   if (!last.validity.valid) {
-    errorlast.innerHTML = "Arrêtes de te prendre pour celui-dont-on-ne-prononce-pas-le-nom&nbsp;!";
+    errorlast.innerHTML = "Mettez votre nom s'il vous plaît";
     errorlast.className = "error active";
     event.preventDefault();
   }
@@ -261,13 +235,20 @@ form.addEventListener("submit", function (event) {
 
 function displayConf() {
   let modalBody = document.querySelector('.modal-body');
-  modalBody.innerHTML = "Merci pour votre inscription";
-let button = document.createElement('button');
-button.onclick = closeModal;
-
-+classecss
-modalBody.appendChild(button)
+  modalBody.innerHTML = "<div class='textCenter'><div class='verticalAlign'>Merci pour </br>votre inscription</div></div>";
+  let button = document.createElement('button');
+  button.onclick = closeModal;
+  button.textContent = "Fermer";
+  button.className = "btn-signup modal-btn";
+  //+classecss
+  modalBody.appendChild(button);
 }
+
+/*
+button.addEventListener(onclick, function {
+ form.reset();
+}
+*/
 
 //
 
