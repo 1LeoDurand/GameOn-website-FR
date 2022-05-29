@@ -5,7 +5,28 @@
   4.
   5.
 */
+const form = document.getElementById('formulaire');//la valeur ne varie pas, on utilise const
 
+const first = document.getElementById('first');
+const errorfirst = document.getElementById('errorfirst');
+
+const last = document.getElementById('last');
+const errorlast = document.getElementById('errorlast');
+
+const email = document.getElementById('email');
+const erroremail = document.getElementById('erroremail');
+
+const birthdate = document.getElementById('birthdate');
+const errorbirthdate = document.getElementById('errorbirthdate');
+
+const quantity = document.getElementById('quantity');
+const errorquantity = document.getElementById('errorquantity');
+
+let locationChecked = document.querySelector('input[name="location"]:checked');
+let errorlocation = document.getElementById('errorlocation');
+
+const checkbox1 = document.getElementById('checkbox1');
+const errorcheckbox1 = document.getElementById('errorcheckbox1');
 
 function editNav() {
   var x = document.getElementById("myTopnav");
@@ -27,7 +48,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-  document.getElementById('formulaire').reset();
+  form.reset();
 }
 
 // close modal event
@@ -41,6 +62,7 @@ document.querySelector("span.close").addEventListener('click', closeModal);
 
 function closeModal() {
   modalbg.style.display = "none";
+  form.reset();
 }
 
 
@@ -88,29 +110,6 @@ For = checkbox1
 // prenom
 //nom
 //email
-
-const form = document.getElementById('formulaire');//la valeur ne varie pas, on utilise const
-
-const first = document.getElementById('first');
-const errorfirst = document.getElementById('errorfirst');
-
-const last = document.getElementById('last');
-const errorlast = document.getElementById('errorlast');
-
-const email = document.getElementById('email');
-const erroremail = document.getElementById('erroremail');
-
-const birthdate = document.getElementById('birthdate');
-const errorbirthdate = document.getElementById('errorbirthdate');
-
-const quantity = document.getElementById('quantity');
-const errorquantity = document.getElementById('errorquantity');
-
-let locationChecked = document.querySelector('input[name="location"]:checked');
-let errorlocation = document.getElementById('errorlocation');
-
-const checkbox1 = document.getElementById('checkbox1');
-const errorcheckbox1 = document.getElementById('errorcheckbox1');
 
 //prenom
 
