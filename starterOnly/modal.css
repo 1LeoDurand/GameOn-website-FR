@@ -184,7 +184,7 @@ main {
   padding-top: 10px;
 }
 
-.modal-body {
+#modal-body {
   padding: 15px 8%;
   margin: 15px auto;
   min-height: 80vh;
@@ -192,6 +192,22 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+#modal2  {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  min-height: 80vh;
+  overflow: auto;
+  background-color: #232323;
+  margin-left: 35%;
 }
 
 .textCenter {

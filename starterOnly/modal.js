@@ -28,6 +28,71 @@ let errorlocation = document.getElementById('errorlocation');
 const checkbox1 = document.getElementById('checkbox1');
 const errorcheckbox1 = document.getElementById('errorcheckbox1');
 
+const modal2 = document.querySelector('#modal2');
+
+let buttonSign = document.querySelector("#button-sign");
+
+const submitForm = (event) => {
+  event.preventDefault();
+  if (!email.validity.valid) {
+    // S'il est invalide, on affiche un message d'erreur personnalisé
+    erroremail.innerHTML = "J'attends une adresse e-mail correcte, cher gamer&nbsp;!";
+    erroremail.className = "error active";
+    // Et on empêche l'envoi des données du formulaire
+  }
+  if (!first.validity.valid) {
+    errorfirst.innerHTML = "Insérer au moins deux caractère";
+    errorfirst.className = "error active";
+  }
+  if (!last.validity.valid) {
+    errorlast.innerHTML = "Mettez votre nom s'il vous plaît";
+    errorlast.className = "error active";
+  }
+  if (!birthdate.validity.valid) {
+    errorbirthdate.innerHTML = "T'es pas un poisson pané alors donne ta date de fabrication&nbsp;!";
+    errorbirthdate.className = "error active";
+  }
+  if (!quantity.validity.valid) {
+    errorquantity.innerHTML = "Avoue combien de tournois auquel tu as participé cher gamer&nbsp;!";
+    errorquantity.className = "error active";
+  }
+  if (!locationChecked) {
+    errorlocation.innerHTML = "Un tournoi!";
+    errorlocation.className = "error active";
+  } 
+  if (!checkbox1.checked) {
+    errorcheckbox1.innerHTML = "Cocher!";
+    errorcheckbox1.className = "error active";
+  }
+  if (checkbox1.checked && locationChecked && quantity.validity.valid) {
+    event.preventDefault();
+    //form.submit();
+    console.log("submit");
+    form.reset();
+    console.log("reset");
+    closeModal();
+    displayThanks(event);
+  }
+};
+
+buttonSign.addEventListener("click", (event)=>{
+  event.preventDefault();
+  submitForm(event);
+});
+
+form.addEventListener('submit', (event)=>{
+  console.log("Blablabla");
+  event.preventDefault();
+  form.submit();
+  closeModal();
+})
+
+
+/*
+window.addEventListener('load', (event)=>{
+  console.log("blabla");
+});*/
+
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -42,13 +107,21 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 
+/*
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+*/
+
+let inscription = document.querySelector('#inscription');
+
+inscription.addEventListener("click", (event) =>{
+  event.preventDefault();
+  launchModal();
+})
 
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-  form.reset();
 }
 
 // close modal event
@@ -62,10 +135,12 @@ document.querySelector("span.close").addEventListener('click', closeModal);
 
 function closeModal() {
   modalbg.style.display = "none";
-  form.reset();
 }
 
-
+window.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM entièrement chargé et analysé");
+  //modal2.style.display = "none";
+});
 
 /*
 (1) Lier les labels aux entrées dans le HTML en utilisant les attributs "for" et "id" dans le code existant. Corriger le code HTML quand nécessaire.
@@ -168,13 +243,13 @@ quantity.addEventListener("input", function (event) {
 
 //Le tournoi de l'année choisi
 
-document.querySelectorAll('input[name="location"]').forEach(element => {
+document.querySelectorAll('input[type="radio"]').forEach(element => {
   element.addEventListener('click', function (event){
       errorlocation.innerHTML = "";
       errorlocation.className = "error";
       locationChecked=true;
   })
-});;
+});
 
 //Condition utilisation
 
@@ -185,79 +260,45 @@ checkbox1.addEventListener("input", function (event) {
   }
 }, false);
 
-//gestion des erreur
+const createModal = () => {
+  let button = document.createElement('button');
+  button.textContent = "Fermer";
+  button.className = "btn-signup modal-btn";
+  //modal2.setAttribute("class", "bground");
+  button.addEventListener("click", closeModal2);
+  modal2.setAttribute("style" , "display:flex");
+  modal2.innerHTML = "<div class='textCenter'><div class='verticalAlign'>Merci pour </br>votre inscription</div></div>";
+  //+classecss
+  modal2.appendChild(button);
+};
 
-form.addEventListener("submit", function (event) {
-  // Chaque fois que l'utilisateur tente d'envoyer les données
-  // on vérifie que le champ email est valide.
-  if (!email.validity.valid) {
-    // S'il est invalide, on affiche un message d'erreur personnalisé
-    erroremail.innerHTML = "J'attends une adresse e-mail correcte, cher gamer&nbsp;!";
-    erroremail.className = "error active";
-    // Et on empêche l'envoi des données du formulaire
-    event.preventDefault();
-  }
-  if (!first.validity.valid) {
-    errorfirst.innerHTML = "Insérer au moins deux caractère";
-    errorfirst.className = "error active";
-    event.preventDefault();
-  }
-  if (!last.validity.valid) {
-    errorlast.innerHTML = "Mettez votre nom s'il vous plaît";
-    errorlast.className = "error active";
-    event.preventDefault();
-  }
-  if (!birthdate.validity.valid) {
-    errorbirthdate.innerHTML = "T'es pas un poisson pané alors donne ta date de fabrication&nbsp;!";
-    errorbirthdate.className = "error active";
-    event.preventDefault();
-  }
-  if (!quantity.validity.valid) {
-    errorquantity.innerHTML = "Avoue combien de tournois auquel tu as participé cher gamer&nbsp;!";
-    errorquantity.className = "error active";
-    event.preventDefault();
-  }
-  if (!locationChecked) {
-    errorlocation.innerHTML = "Un tournoi!";
-    errorlocation.className = "error active";
-    event.preventDefault();
-  } 
-  if (!checkbox1.checked) {
-    errorcheckbox1.innerHTML = "Cocher!";
-    errorcheckbox1.className = "error active";
-    event.preventDefault();
-  }
-  if (checkbox1.checked && locationChecked && quantity.validity.valid) {
-    displayConf();
-  }
-}, false);
+const closeModal2 = () => {
+  modal2.style.display = "none";
+};
 
-function displayConf() {
-  let modalBody = document.querySelector('.modal-body');
-  modalBody.innerHTML = "<div class='textCenter'><div class='verticalAlign'>Merci pour </br>votre inscription</div></div>";
+//closemodal
+
+const displayThanks = (event) =>{
+  event.preventDefault();
+  console.log("Thanks");
+  createModal();
+}
+  
+  
+  /*checkbox1.checked = false;
+  let modal2 = document.querySelector('#modal2');
+  if (modal2.innerHTML=="") {
+    modal2.innerHTML = "<div class='textCenter'><div class='verticalAlign'>Merci pour </br>votre inscription</div></div>";
+    console.log("pas vide");
+  }
+  else {
+    modal2.innerHTML="";
+    console.log("vide");
+  }
   let button = document.createElement('button');
   button.onclick = closeModal;
   button.textContent = "Fermer";
   button.className = "btn-signup modal-btn";
+  button.setAttribute("type", "reset");
   //+classecss
-  modalBody.appendChild(button);
-}
-
-/*
-button.addEventListener(onclick, function {
- form.reset();
-}
-*/
-
-//
-
-/*
-4 : 
-Merci ! Votre réservation a été reçue.
-
-*/
-/* 
-5: 
-- Image déformé -> object-fit: cover;
-- texte coupé -> word-break: break-word;
-*/
+  modal2.appendChild(button);*/
